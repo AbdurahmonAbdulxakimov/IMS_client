@@ -1,0 +1,1263 @@
+swagger: '2.0'
+info:
+  title: Inventory Management System API
+  description: CW done by student 00017394
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: 00017394@wiut.uz
+  license:
+    name: BSD License
+  version: v1
+host: localhost:8000
+schemes:
+- http
+basePath: /api
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  Basic:
+    type: basic
+security:
+- Basic: []
+paths:
+  /auth/activities/:
+    get:
+      operationId: auth_activities_list
+      description: ViewSet for UserActivity model (audit logs)
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserActivity'
+      tags:
+      - auth
+    parameters: []
+  /auth/activities/{activity_uuid}/:
+    get:
+      operationId: auth_activities_read
+      description: ViewSet for UserActivity model (audit logs)
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/UserActivity'
+      tags:
+      - auth
+    parameters:
+    - name: activity_uuid
+      in: path
+      description: A UUID string identifying this User Activity.
+      required: true
+      type: string
+      format: uuid
+  /auth/permissions/:
+    get:
+      operationId: auth_permissions_list
+      description: List all available permissions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+      - auth
+    parameters: []
+  /auth/role-permissions/:
+    get:
+      operationId: auth_role-permissions_list
+      description: ViewSet for RolePermission model
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RolePermission'
+      tags:
+      - auth
+    post:
+      operationId: auth_role-permissions_create
+      description: ViewSet for RolePermission model
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/RolePermission'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/RolePermission'
+      tags:
+      - auth
+    parameters: []
+  /auth/role-permissions/{id}/:
+    get:
+      operationId: auth_role-permissions_read
+      description: ViewSet for RolePermission model
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RolePermission'
+      tags:
+      - auth
+    put:
+      operationId: auth_role-permissions_update
+      description: ViewSet for RolePermission model
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/RolePermission'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RolePermission'
+      tags:
+      - auth
+    patch:
+      operationId: auth_role-permissions_partial_update
+      description: ViewSet for RolePermission model
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/RolePermission'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RolePermission'
+      tags:
+      - auth
+    delete:
+      operationId: auth_role-permissions_delete
+      description: ViewSet for RolePermission model
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - auth
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this Role Permission.
+      required: true
+      type: integer
+  /auth/token/:
+    post:
+      operationId: auth_token_create
+      description: Login view with JWT token generation and activity logging
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CustomTokenObtainPair'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/CustomTokenObtainPair'
+      tags:
+      - auth
+    parameters: []
+  /auth/token/refresh/:
+    post:
+      operationId: auth_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/TokenRefresh'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/TokenRefresh'
+      tags:
+      - auth
+    parameters: []
+  /auth/token/verify/:
+    post:
+      operationId: auth_token_verify_create
+      description: |-
+        Takes a token and indicates if it is valid.  This view provides no
+        information about a token's fitness for a particular use.
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/TokenVerify'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/TokenVerify'
+      tags:
+      - auth
+    parameters: []
+  /auth/users/:
+    get:
+      operationId: auth_users_list
+      description: ViewSet for User model
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+      tags:
+      - auth
+    parameters: []
+  /auth/users/me/:
+    get:
+      operationId: auth_users_me
+      description: Get current user information
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+      tags:
+      - auth
+    parameters: []
+  /auth/users/{user_uuid}/:
+    get:
+      operationId: auth_users_read
+      description: ViewSet for User model
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+      - auth
+    parameters:
+    - name: user_uuid
+      in: path
+      description: A UUID string identifying this User.
+      required: true
+      type: string
+      format: uuid
+  /clients/clients/:
+    get:
+      operationId: clients_clients_list
+      description: Client viewset for User model
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Client'
+      tags:
+      - clients
+    post:
+      operationId: clients_clients_create
+      description: Client viewset for User model
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Client'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Client'
+      tags:
+      - clients
+    parameters: []
+  /clients/clients/{client_uuid}/:
+    get:
+      operationId: clients_clients_read
+      description: Client viewset for User model
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Client'
+      tags:
+      - clients
+    put:
+      operationId: clients_clients_update
+      description: Client viewset for User model
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Client'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Client'
+      tags:
+      - clients
+    patch:
+      operationId: clients_clients_partial_update
+      description: Client viewset for User model
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Client'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Client'
+      tags:
+      - clients
+    delete:
+      operationId: clients_clients_delete
+      description: Client viewset for User model
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - clients
+    parameters:
+    - name: client_uuid
+      in: path
+      description: A UUID string identifying this client.
+      required: true
+      type: string
+      format: uuid
+  /inventory/product-categories/:
+    get:
+      operationId: inventory_product-categories_list
+      description: Product Category API View
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProductCategory'
+      tags:
+      - inventory
+    post:
+      operationId: inventory_product-categories_create
+      description: Product Category API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ProductCategory'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProductCategory'
+      tags:
+      - inventory
+    put:
+      operationId: inventory_product-categories_update
+      description: Product Category API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ProductCategory'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProductCategory'
+      tags:
+      - inventory
+    patch:
+      operationId: inventory_product-categories_partial_update
+      description: Product Category API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ProductCategory'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProductCategory'
+      tags:
+      - inventory
+    delete:
+      operationId: inventory_product-categories_delete
+      description: Product Category API View
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - inventory
+    parameters: []
+  /inventory/products/:
+    get:
+      operationId: inventory_products_list
+      description: Product API View
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+      tags:
+      - inventory
+    delete:
+      operationId: inventory_products_delete
+      description: Product API View
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - inventory
+    parameters: []
+  /inventory/products/create/:
+    post:
+      operationId: inventory_products_create_create
+      description: Product Create API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ProductCreate'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProductCreate'
+      tags:
+      - inventory
+    put:
+      operationId: inventory_products_create_update
+      description: Product Create API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ProductCreate'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProductCreate'
+      tags:
+      - inventory
+    patch:
+      operationId: inventory_products_create_partial_update
+      description: Product Create API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ProductCreate'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProductCreate'
+      tags:
+      - inventory
+    parameters: []
+  /inventory/stocks/:
+    get:
+      operationId: inventory_stocks_list
+      description: Stock API View
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Stock'
+      tags:
+      - inventory
+    delete:
+      operationId: inventory_stocks_delete
+      description: Stock API View
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - inventory
+    parameters: []
+  /inventory/stocks/create/:
+    post:
+      operationId: inventory_stocks_create_create
+      description: Stock Create API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/StockCreate'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/StockCreate'
+      tags:
+      - inventory
+    put:
+      operationId: inventory_stocks_create_update
+      description: Stock Create API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/StockCreate'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StockCreate'
+      tags:
+      - inventory
+    patch:
+      operationId: inventory_stocks_create_partial_update
+      description: Stock Create API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/StockCreate'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StockCreate'
+      tags:
+      - inventory
+    parameters: []
+  /inventory/transactions/:
+    get:
+      operationId: inventory_transactions_list
+      description: Transaction API View
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+      tags:
+      - inventory
+    delete:
+      operationId: inventory_transactions_delete
+      description: Transaction API View
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - inventory
+    parameters: []
+  /inventory/transactions/create/:
+    post:
+      operationId: inventory_transactions_create_create
+      description: Transaction Create API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/TransactionCreate'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/TransactionCreate'
+      tags:
+      - inventory
+    parameters: []
+  /inventory/warehouses/:
+    get:
+      operationId: inventory_warehouses_list
+      description: Warehouse API View
+      parameters:
+      - name: search
+        in: query
+        description: A search term.
+        required: false
+        type: string
+      - name: ordering
+        in: query
+        description: Which field to use when ordering the results.
+        required: false
+        type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Warehouse'
+      tags:
+      - inventory
+    post:
+      operationId: inventory_warehouses_create
+      description: Warehouse API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Warehouse'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Warehouse'
+      tags:
+      - inventory
+    put:
+      operationId: inventory_warehouses_update
+      description: Warehouse API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Warehouse'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Warehouse'
+      tags:
+      - inventory
+    patch:
+      operationId: inventory_warehouses_partial_update
+      description: Warehouse API View
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Warehouse'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Warehouse'
+      tags:
+      - inventory
+    delete:
+      operationId: inventory_warehouses_delete
+      description: Warehouse API View
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - inventory
+    parameters: []
+definitions:
+  User:
+    required:
+    - username
+    type: object
+    properties:
+      user_uuid:
+        title: User uuid
+        type: string
+        format: uuid
+        readOnly: true
+      username:
+        title: Username
+        type: string
+        maxLength: 30
+        minLength: 1
+      email:
+        title: Email
+        type: string
+        maxLength: 120
+      first_name:
+        title: First name
+        type: string
+        maxLength: 60
+      last_name:
+        title: Last name
+        type: string
+        maxLength: 60
+      role:
+        title: Role
+        type: string
+        enum:
+        - superuser
+        - admin
+        - manager
+        - stuff
+      status:
+        title: Status
+        type: boolean
+      last_login:
+        title: Last login
+        type: string
+        format: date-time
+        readOnly: true
+        x-nullable: true
+      created_date:
+        title: Created date
+        type: string
+        format: date
+        readOnly: true
+  UserActivity:
+    required:
+    - action_type
+    - action_description
+    type: object
+    properties:
+      activity_uuid:
+        title: Activity uuid
+        type: string
+        format: uuid
+        readOnly: true
+      user:
+        $ref: '#/definitions/User'
+      user_uuid:
+        title: User uuid
+        type: string
+        format: uuid
+      action_type:
+        title: Action type
+        type: string
+        enum:
+        - login
+        - logout
+        - create
+        - update
+        - delete
+        - view
+        - download
+        - upload
+        - other
+      action_description:
+        title: Action description
+        type: string
+        minLength: 1
+      ip_address:
+        title: Ip address
+        type: string
+        minLength: 1
+        x-nullable: true
+      user_agent:
+        title: User agent
+        type: string
+      request_path:
+        title: Request path
+        type: string
+        maxLength: 500
+      request_method:
+        title: Request method
+        type: string
+        maxLength: 10
+      status_code:
+        title: Status code
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+        x-nullable: true
+      created_at:
+        title: Created at
+        type: string
+        format: date-time
+        readOnly: true
+  RolePermission:
+    required:
+    - role
+    - permission
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      role:
+        title: Role
+        type: string
+        enum:
+        - superuser
+        - admin
+        - manager
+        - stuff
+      permission:
+        title: Permission
+        type: string
+        enum:
+        - user_create
+        - user_read
+        - user_update
+        - user_delete
+        - permission_assign
+        - permission_revoke
+        - activity_view
+        - activity_export
+        - admin_access
+        - stock_create
+        - stock_read
+        - stock_update
+        - stock_delete
+        - client_create
+        - client_read
+        - client_update
+        - client_delete
+        - transaction_create
+        - transaction_read
+        - transaction_update
+        - transaction_delete
+        - product_create
+        - product_read
+        - product_update
+        - product_delete
+        - product_category_create
+        - product_category_read
+        - product_category_update
+        - product_category_delete
+        - warehouse_create
+        - warehouse_read
+        - warehouse_update
+        - warehouse_delete
+      permission_label:
+        title: Permission label
+        type: string
+        readOnly: true
+        minLength: 1
+      created_date:
+        title: Created date
+        type: string
+        format: date
+        readOnly: true
+  CustomTokenObtainPair:
+    required:
+    - username
+    - password
+    type: object
+    properties:
+      username:
+        title: Username
+        type: string
+        minLength: 1
+      password:
+        title: Password
+        type: string
+        minLength: 1
+  TokenRefresh:
+    required:
+    - refresh
+    type: object
+    properties:
+      refresh:
+        title: Refresh
+        type: string
+        minLength: 1
+      access:
+        title: Access
+        type: string
+        readOnly: true
+        minLength: 1
+  TokenVerify:
+    required:
+    - token
+    type: object
+    properties:
+      token:
+        title: Token
+        type: string
+        minLength: 1
+  Client:
+    required:
+    - name
+    - email
+    - phone
+    - address
+    type: object
+    properties:
+      client_uuid:
+        title: Client uuid
+        type: string
+        format: uuid
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 120
+        minLength: 1
+      email:
+        title: Email
+        type: string
+        format: email
+        maxLength: 255
+        minLength: 1
+      phone:
+        title: Phone
+        type: string
+        maxLength: 13
+        minLength: 1
+      address:
+        title: Address
+        type: string
+        maxLength: 255
+        minLength: 1
+      registration_date:
+        title: Registration date
+        type: string
+        format: date
+        readOnly: true
+  ProductCategory:
+    required:
+    - name
+    - description
+    type: object
+    properties:
+      category_uuid:
+        title: Category uuid
+        type: string
+        format: uuid
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 255
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+  Product:
+    required:
+    - name
+    - description
+    - prime_cost
+    - price
+    type: object
+    properties:
+      product_uuid:
+        title: Product uuid
+        type: string
+        format: uuid
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 255
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      prime_cost:
+        title: Prime cost
+        type: string
+        format: decimal
+      price:
+        title: Price
+        type: string
+        format: decimal
+      category:
+        $ref: '#/definitions/ProductCategory'
+  ProductCreate:
+    required:
+    - name
+    - description
+    - prime_cost
+    - price
+    type: object
+    properties:
+      name:
+        title: Name
+        type: string
+        maxLength: 255
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      prime_cost:
+        title: Prime cost
+        type: string
+        format: decimal
+      price:
+        title: Price
+        type: string
+        format: decimal
+      category_id:
+        title: Category id
+        type: string
+        readOnly: true
+  Warehouse:
+    required:
+    - name
+    - location
+    type: object
+    properties:
+      warehouse_uuid:
+        title: Warehouse uuid
+        type: string
+        format: uuid
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 255
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        x-nullable: true
+      location:
+        title: Location
+        type: string
+        minLength: 1
+      total_capacity:
+        title: Total capacity
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      available_capacity:
+        title: Available capacity
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+  Stock:
+    type: object
+    properties:
+      stock_uuid:
+        title: Stock uuid
+        type: string
+        format: uuid
+        readOnly: true
+      quantity_on_stock:
+        title: Quantity on stock
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      minimum_stock_level:
+        title: Minimum stock level
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      maximum_stock_level:
+        title: Maximum stock level
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      last_updated:
+        title: Last updated
+        type: string
+        format: date-time
+        readOnly: true
+      warehouse:
+        $ref: '#/definitions/Warehouse'
+      product:
+        $ref: '#/definitions/Product'
+  StockCreate:
+    required:
+    - warehouse
+    - product
+    type: object
+    properties:
+      quantity_on_stock:
+        title: Quantity on stock
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      minimum_stock_level:
+        title: Minimum stock level
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      maximum_stock_level:
+        title: Maximum stock level
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      warehouse:
+        title: Warehouse
+        type: string
+        format: uuid
+      product:
+        title: Product
+        type: string
+        format: uuid
+  Transaction:
+    required:
+    - transaction_type
+    - unit_price
+    - total_amount
+    type: object
+    properties:
+      transaction_uuid:
+        title: Transaction uuid
+        type: string
+        format: uuid
+        readOnly: true
+      transaction_type:
+        title: Transaction type
+        type: string
+        enum:
+        - sale
+        - return
+        - exchange
+        - arrival
+      quantity:
+        title: Quantity
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      unit_price:
+        title: Unit price
+        type: string
+        format: decimal
+      total_amount:
+        title: Total amount
+        type: string
+        format: decimal
+      status:
+        title: Status
+        type: string
+        enum:
+        - pending
+        - cempleted
+        - cancelled
+      transaction_time:
+        title: Transaction time
+        type: string
+        format: date-time
+        readOnly: true
+      stock:
+        $ref: '#/definitions/StockCreate'
+      client:
+        $ref: '#/definitions/Client'
+      user:
+        $ref: '#/definitions/User'
+  TransactionCreate:
+    required:
+    - transaction_type
+    - stock
+    - client
+    - user
+    - unit_price
+    - total_amount
+    type: object
+    properties:
+      transaction_type:
+        title: Transaction type
+        type: string
+        enum:
+        - sale
+        - return
+        - exchange
+        - arrival
+      stock:
+        title: Stock
+        type: string
+        format: uuid
+      client:
+        title: Client
+        type: string
+        format: uuid
+      user:
+        title: User
+        type: string
+        format: uuid
+      quantity:
+        title: Quantity
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      unit_price:
+        title: Unit price
+        type: string
+        format: decimal
+      total_amount:
+        title: Total amount
+        type: string
+        format: decimal

@@ -7,11 +7,12 @@ A production-ready, minimalistic dashboard application for managing inventory, s
 - **🔐 Authentication**: Secure login with JWT tokens and automatic refresh
 - **📊 Dashboard**: Real-time overview with key statistics
 - **👤 Profile**: View user profile and account information
-- **👥 Clients**: Manage company clients with advanced search
-- **🏢 Warehouses**: Track warehouse capacity and utilization
-- **📦 Products**: Browse products with categories and pricing
-- **📈 Stocks**: Monitor stock levels with intelligent status indicators
-- **💳 Transactions**: Complete transaction history with filtering
+- **👥 Clients**: Full CRUD operations - Create, Read, Update, Delete clients with advanced search
+- **🏢 Warehouses**: Create and manage warehouses with capacity tracking
+- **📦 Products**: Add and edit products with categories and pricing
+- **🏷️ Categories**: Manage product categories with full CRUD operations
+- **📈 Stocks**: Create and update stock levels with intelligent status indicators
+- **💳 Transactions**: Create new transactions (sale, return, exchange, arrival) with automatic calculations
 
 ## 🚀 Tech Stack
 

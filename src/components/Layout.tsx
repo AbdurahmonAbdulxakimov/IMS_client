@@ -22,6 +22,7 @@ const Layout = ({ children }: LayoutProps) => {
     { path: '/clients', label: 'Clients', icon: '👥' },
     { path: '/warehouses', label: 'Warehouses', icon: '🏢' },
     { path: '/products', label: 'Products', icon: '📦' },
+    { path: '/categories', label: 'Categories', icon: '🏷️' },
     { path: '/stocks', label: 'Stocks', icon: '📈' },
     { path: '/transactions', label: 'Transactions', icon: '💳' },
   ];

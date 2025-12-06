@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import Clients from './pages/Clients';
 import Warehouses from './pages/Warehouses';
 import Products from './pages/Products';
+import Categories from './pages/Categories';
 import Stocks from './pages/Stocks';
 import Transactions from './pages/Transactions';
 import './unfold-custom.css';
@@ -69,6 +70,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Layout><Products /></Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/categories"
+              element={
+                <ProtectedRoute>
+                  <Layout><Categories /></Layout>
                 </ProtectedRoute>
               }
             />

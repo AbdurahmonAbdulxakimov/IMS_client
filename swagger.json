@@ -358,7 +358,10 @@ paths:
   /inventory/product-categories/:
     get:
       operationId: inventory_product-categories_list
-      description: Product Category API View
+      summary: Product Category List and Create API View
+      description: |-
+        GET /product-categories/ - List all product categories
+        POST /product-categories/ - Create a new product category
       parameters:
       - name: search
         in: query
@@ -381,7 +384,10 @@ paths:
       - inventory
     post:
       operationId: inventory_product-categories_create
-      description: Product Category API View
+      summary: Product Category List and Create API View
+      description: |-
+        GET /product-categories/ - List all product categories
+        POST /product-categories/ - Create a new product category
       parameters:
       - name: data
         in: body
@@ -395,9 +401,30 @@ paths:
             $ref: '#/definitions/ProductCategory'
       tags:
       - inventory
+    parameters: []
+  /inventory/product-categories/{id}/:
+    get:
+      operationId: inventory_product-categories_read
+      summary: Product Category Detail API View
+      description: |-
+        GET /product-categories/<id>/ - Retrieve a product category
+        PUT/PATCH /product-categories/<id>/ - Update a product category
+        DELETE /product-categories/<id>/ - Delete a product category
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProductCategory'
+      tags:
+      - inventory
     put:
       operationId: inventory_product-categories_update
-      description: Product Category API View
+      summary: Product Category Detail API View
+      description: |-
+        GET /product-categories/<id>/ - Retrieve a product category
+        PUT/PATCH /product-categories/<id>/ - Update a product category
+        DELETE /product-categories/<id>/ - Delete a product category
       parameters:
       - name: data
         in: body
@@ -413,7 +440,11 @@ paths:
       - inventory
     patch:
       operationId: inventory_product-categories_partial_update
-      description: Product Category API View
+      summary: Product Category Detail API View
+      description: |-
+        GET /product-categories/<id>/ - Retrieve a product category
+        PUT/PATCH /product-categories/<id>/ - Update a product category
+        DELETE /product-categories/<id>/ - Delete a product category
       parameters:
       - name: data
         in: body
@@ -429,18 +460,29 @@ paths:
       - inventory
     delete:
       operationId: inventory_product-categories_delete
-      description: Product Category API View
+      summary: Product Category Detail API View
+      description: |-
+        GET /product-categories/<id>/ - Retrieve a product category
+        PUT/PATCH /product-categories/<id>/ - Update a product category
+        DELETE /product-categories/<id>/ - Delete a product category
       parameters: []
       responses:
         '204':
           description: ''
       tags:
       - inventory
-    parameters: []
+    parameters:
+    - name: id
+      in: path
+      required: true
+      type: string
   /inventory/products/:
     get:
       operationId: inventory_products_list
-      description: Product API View
+      summary: Product List and Create API View
+      description: |-
+        GET /products/ - List all products
+        POST /products/ - Create a new product
       parameters:
       - name: search
         in: query
@@ -461,20 +503,12 @@ paths:
               $ref: '#/definitions/Product'
       tags:
       - inventory
-    delete:
-      operationId: inventory_products_delete
-      description: Product API View
-      parameters: []
-      responses:
-        '204':
-          description: ''
-      tags:
-      - inventory
-    parameters: []
-  /inventory/products/create/:
     post:
-      operationId: inventory_products_create_create
-      description: Product Create API View
+      operationId: inventory_products_create
+      summary: Product List and Create API View
+      description: |-
+        GET /products/ - List all products
+        POST /products/ - Create a new product
       parameters:
       - name: data
         in: body
@@ -488,9 +522,30 @@ paths:
             $ref: '#/definitions/ProductCreate'
       tags:
       - inventory
+    parameters: []
+  /inventory/products/{id}/:
+    get:
+      operationId: inventory_products_read
+      summary: Product Detail API View
+      description: |-
+        GET /products/<id>/ - Retrieve a product
+        PUT/PATCH /products/<id>/ - Update a product
+        DELETE /products/<id>/ - Delete a product
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Product'
+      tags:
+      - inventory
     put:
-      operationId: inventory_products_create_update
-      description: Product Create API View
+      operationId: inventory_products_update
+      summary: Product Detail API View
+      description: |-
+        GET /products/<id>/ - Retrieve a product
+        PUT/PATCH /products/<id>/ - Update a product
+        DELETE /products/<id>/ - Delete a product
       parameters:
       - name: data
         in: body
@@ -505,8 +560,12 @@ paths:
       tags:
       - inventory
     patch:
-      operationId: inventory_products_create_partial_update
-      description: Product Create API View
+      operationId: inventory_products_partial_update
+      summary: Product Detail API View
+      description: |-
+        GET /products/<id>/ - Retrieve a product
+        PUT/PATCH /products/<id>/ - Update a product
+        DELETE /products/<id>/ - Delete a product
       parameters:
       - name: data
         in: body
@@ -520,11 +579,31 @@ paths:
             $ref: '#/definitions/ProductCreate'
       tags:
       - inventory
-    parameters: []
+    delete:
+      operationId: inventory_products_delete
+      summary: Product Detail API View
+      description: |-
+        GET /products/<id>/ - Retrieve a product
+        PUT/PATCH /products/<id>/ - Update a product
+        DELETE /products/<id>/ - Delete a product
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - inventory
+    parameters:
+    - name: id
+      in: path
+      required: true
+      type: string
   /inventory/stocks/:
     get:
       operationId: inventory_stocks_list
-      description: Stock API View
+      summary: Stock List and Create API View
+      description: |-
+        GET /stocks/ - List all stocks
+        POST /stocks/ - Create a new stock
       parameters:
       - name: search
         in: query
@@ -545,20 +624,12 @@ paths:
               $ref: '#/definitions/Stock'
       tags:
       - inventory
-    delete:
-      operationId: inventory_stocks_delete
-      description: Stock API View
-      parameters: []
-      responses:
-        '204':
-          description: ''
-      tags:
-      - inventory
-    parameters: []
-  /inventory/stocks/create/:
     post:
-      operationId: inventory_stocks_create_create
-      description: Stock Create API View
+      operationId: inventory_stocks_create
+      summary: Stock List and Create API View
+      description: |-
+        GET /stocks/ - List all stocks
+        POST /stocks/ - Create a new stock
       parameters:
       - name: data
         in: body
@@ -572,9 +643,30 @@ paths:
             $ref: '#/definitions/StockCreate'
       tags:
       - inventory
+    parameters: []
+  /inventory/stocks/{id}/:
+    get:
+      operationId: inventory_stocks_read
+      summary: Stock Detail API View
+      description: |-
+        GET /stocks/<id>/ - Retrieve a stock
+        PUT/PATCH /stocks/<id>/ - Update a stock
+        DELETE /stocks/<id>/ - Delete a stock
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Stock'
+      tags:
+      - inventory
     put:
-      operationId: inventory_stocks_create_update
-      description: Stock Create API View
+      operationId: inventory_stocks_update
+      summary: Stock Detail API View
+      description: |-
+        GET /stocks/<id>/ - Retrieve a stock
+        PUT/PATCH /stocks/<id>/ - Update a stock
+        DELETE /stocks/<id>/ - Delete a stock
       parameters:
       - name: data
         in: body
@@ -589,8 +681,12 @@ paths:
       tags:
       - inventory
     patch:
-      operationId: inventory_stocks_create_partial_update
-      description: Stock Create API View
+      operationId: inventory_stocks_partial_update
+      summary: Stock Detail API View
+      description: |-
+        GET /stocks/<id>/ - Retrieve a stock
+        PUT/PATCH /stocks/<id>/ - Update a stock
+        DELETE /stocks/<id>/ - Delete a stock
       parameters:
       - name: data
         in: body
@@ -604,11 +700,31 @@ paths:
             $ref: '#/definitions/StockCreate'
       tags:
       - inventory
-    parameters: []
+    delete:
+      operationId: inventory_stocks_delete
+      summary: Stock Detail API View
+      description: |-
+        GET /stocks/<id>/ - Retrieve a stock
+        PUT/PATCH /stocks/<id>/ - Update a stock
+        DELETE /stocks/<id>/ - Delete a stock
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - inventory
+    parameters:
+    - name: id
+      in: path
+      required: true
+      type: string
   /inventory/transactions/:
     get:
       operationId: inventory_transactions_list
-      description: Transaction API View
+      summary: Transaction List and Create API View
+      description: |-
+        GET /transactions/ - List all transactions
+        POST /transactions/ - Create a new transaction
       parameters:
       - name: search
         in: query
@@ -629,20 +745,12 @@ paths:
               $ref: '#/definitions/Transaction'
       tags:
       - inventory
-    delete:
-      operationId: inventory_transactions_delete
-      description: Transaction API View
-      parameters: []
-      responses:
-        '204':
-          description: ''
-      tags:
-      - inventory
-    parameters: []
-  /inventory/transactions/create/:
     post:
-      operationId: inventory_transactions_create_create
-      description: Transaction Create API View
+      operationId: inventory_transactions_create
+      summary: Transaction List and Create API View
+      description: |-
+        GET /transactions/ - List all transactions
+        POST /transactions/ - Create a new transaction
       parameters:
       - name: data
         in: body
@@ -657,10 +765,31 @@ paths:
       tags:
       - inventory
     parameters: []
+  /inventory/transactions/{id}/:
+    get:
+      operationId: inventory_transactions_read
+      summary: Transaction Detail API View
+      description: GET /transactions/<id>/ - Retrieve a transaction
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Transaction'
+      tags:
+      - inventory
+    parameters:
+    - name: id
+      in: path
+      required: true
+      type: string
   /inventory/warehouses/:
     get:
       operationId: inventory_warehouses_list
-      description: Warehouse API View
+      summary: Warehouse List and Create API View
+      description: |-
+        GET /warehouses/ - List all warehouses
+        POST /warehouses/ - Create a new warehouse
       parameters:
       - name: search
         in: query
@@ -683,7 +812,10 @@ paths:
       - inventory
     post:
       operationId: inventory_warehouses_create
-      description: Warehouse API View
+      summary: Warehouse List and Create API View
+      description: |-
+        GET /warehouses/ - List all warehouses
+        POST /warehouses/ - Create a new warehouse
       parameters:
       - name: data
         in: body
@@ -697,9 +829,30 @@ paths:
             $ref: '#/definitions/Warehouse'
       tags:
       - inventory
+    parameters: []
+  /inventory/warehouses/{id}/:
+    get:
+      operationId: inventory_warehouses_read
+      summary: Warehouse Detail API View
+      description: |-
+        GET /warehouses/<id>/ - Retrieve a warehouse
+        PUT/PATCH /warehouses/<id>/ - Update a warehouse
+        DELETE /warehouses/<id>/ - Delete a warehouse
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Warehouse'
+      tags:
+      - inventory
     put:
       operationId: inventory_warehouses_update
-      description: Warehouse API View
+      summary: Warehouse Detail API View
+      description: |-
+        GET /warehouses/<id>/ - Retrieve a warehouse
+        PUT/PATCH /warehouses/<id>/ - Update a warehouse
+        DELETE /warehouses/<id>/ - Delete a warehouse
       parameters:
       - name: data
         in: body
@@ -715,7 +868,11 @@ paths:
       - inventory
     patch:
       operationId: inventory_warehouses_partial_update
-      description: Warehouse API View
+      summary: Warehouse Detail API View
+      description: |-
+        GET /warehouses/<id>/ - Retrieve a warehouse
+        PUT/PATCH /warehouses/<id>/ - Update a warehouse
+        DELETE /warehouses/<id>/ - Delete a warehouse
       parameters:
       - name: data
         in: body
@@ -731,14 +888,22 @@ paths:
       - inventory
     delete:
       operationId: inventory_warehouses_delete
-      description: Warehouse API View
+      summary: Warehouse Detail API View
+      description: |-
+        GET /warehouses/<id>/ - Retrieve a warehouse
+        PUT/PATCH /warehouses/<id>/ - Update a warehouse
+        DELETE /warehouses/<id>/ - Delete a warehouse
       parameters: []
       responses:
         '204':
           description: ''
       tags:
       - inventory
-    parameters: []
+    parameters:
+    - name: id
+      in: path
+      required: true
+      type: string
 definitions:
   User:
     required:
@@ -1049,6 +1214,7 @@ definitions:
     - description
     - prime_cost
     - price
+    - category
     type: object
     properties:
       name:
@@ -1068,10 +1234,10 @@ definitions:
         title: Price
         type: string
         format: decimal
-      category_id:
-        title: Category id
+      category:
+        title: Category
         type: string
-        readOnly: true
+        format: uuid
   Warehouse:
     required:
     - name

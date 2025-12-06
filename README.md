@@ -98,6 +98,8 @@ The application expects a backend API with the following endpoints:
 
 See `swagger.json` for complete API documentation.
 
+Note: `swagger.json` can be found in backend api through the url `/swagger.json`.
+
 ## 📁 Project Structure
 
 ```
@@ -125,95 +127,3 @@ src/
 │   └── formatters.ts
 └── unfold-custom.css   # Custom styling
 ```
-
-## 🐳 Docker Deployment
-
-Build and run with Docker:
-
-```bash
-# Build image
-docker build -t ims-frontend .
-
-# Run container
-docker run -p 3000:80 ims-frontend
-
-# Or use docker-compose
-docker-compose up -d
-```
-
-## 🚢 Production Deployment
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions including:
-- Static hosting (Netlify, Vercel)
-- Docker deployment
-- Traditional server setup (Nginx, Apache)
-- Environment configuration
-- Security checklist
-
-## 🧪 Testing
-
-See [TESTING.md](TESTING.md) for comprehensive testing guide including:
-- Manual testing checklist
-- API testing scenarios
-- Browser compatibility
-- Performance testing
-- Security testing
-
-## 🎨 Features Highlights
-
-### Smart Error Handling
-- Network error detection
-- Automatic token refresh
-- User-friendly error messages
-- Error boundaries for crash recovery
-
-### Performance Optimized
-- Code splitting
-- Lazy loading
-- Minified production builds
-- Gzip compression
-- Asset caching
-
-### User Experience
-- Loading states for all async operations
-- Empty states with helpful messages
-- Responsive design (mobile, tablet, desktop)
-- Smooth transitions and animations
-- Intuitive navigation
-
-### Security
-- JWT token authentication
-- Automatic token refresh
-- Protected routes
-- XSS protection
-- Secure headers (in nginx config)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and type checking
-5. Submit a pull request
-
-## 📄 License
-
-See LICENSE file for details.
-
-## 🆘 Support
-
-For issues and questions:
-1. Check [TESTING.md](TESTING.md) for common issues
-2. Review [DEPLOYMENT.md](DEPLOYMENT.md) for deployment problems
-3. Open an issue on GitHub
-
-## 🔮 Future Enhancements
-
-- [ ] Unit and integration tests
-- [ ] E2E testing with Playwright
-- [ ] Real-time updates with WebSockets
-- [ ] Advanced filtering and sorting
-- [ ] Export functionality (CSV, PDF)
-- [ ] Dark mode support
-- [ ] Multi-language support
-- [ ] Advanced analytics dashboard
